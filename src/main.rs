@@ -35,6 +35,24 @@ impl Board<I2C0> {
     }
 }
 
+#[cfg(roarbms)]
+impl Board<I2C0> {
+    pub fn take() -> Self {
+        let peripherals = Peripherals::take().unwrap();
+
+        Board {
+            display: DisplayPeripheral {
+                scl: peripherals.pins.gpio9.into(),
+                sda: peripherals.pins.gpio8.into(),
+                i2c: peripherals.i2c0,
+            },
+            button: ButtonPeripheral {
+                pin: peripherals.pins.gpio3.into(),
+            },
+        }
+    }
+}
+
 pub struct DisplayPeripheral<I2C> {
     pub scl: AnyIOPin,
     pub sda: AnyIOPin,
@@ -67,10 +85,7 @@ fn test_render() -> () {
     )
     .into_buffered_graphics_mode();
 
-    display
-        .init()
-        .map_err(|e| anyhow::anyhow!("Display error: {:?}", e))
-        .expect("error initializing display");
+    display.init().expect("error initializing display");
 
     display.clear();
 
@@ -80,11 +95,8 @@ fn test_render() -> () {
 
         Image::new(&image, Point::zero())
             .draw(&mut display)
-            .expect("error rendering image");
-        display
-            .flush()
-            .map_err(|e| anyhow::anyhow!("Display error: {:?}", e))
-            .expect("error flushing display");
+            .unwrap();
+        display.flush().unwrap();
         delay::Ets::delay_ms(5000);
     }
 
@@ -97,12 +109,9 @@ fn test_render() -> () {
                 MonoTextStyle::new(&FONT_10X20, BinaryColor::On),
             )
             .draw(&mut display)
-            .expect("error rendering text");
+            .unwrap();
 
-            display
-                .flush()
-                .map_err(|e| anyhow::anyhow!("Display error: {:?}", e))
-                .expect("error flushing display");
+            display.flush().unwrap();
 
             delay::Ets::delay_ms(1);
         }
@@ -131,12 +140,9 @@ fn test_render() -> () {
                 MonoTextStyle::new(&FONT_10X20, BinaryColor::On),
             )
             .draw(&mut display)
-            .expect("error rendering text");
+            .unwrap();
 
-            display
-                .flush()
-                .map_err(|e| anyhow::anyhow!("Display error: {:?}", e))
-                .expect("error flushing display");
+            display.flush().unwrap();
 
             dirty = false;
         }
