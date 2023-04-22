@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Flash" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+    <option name="command" value="espflash" />
+    <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+    <option name="emulateTerminal" value="false" />
+    <option name="channel" value="DEFAULT" />
+    <option name="requiredFeatures" value="false" />
+    <option name="allFeatures" value="false" />
+    <option name="withSudo" value="false" />
+    <option name="buildTarget" value="REMOTE" />
+    <option name="backtrace" value="SHORT" />
+    <envs>
+      <env name="LIBCLANG_PATH" value="$USER_HOME$/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-15.0.0-20221201/esp-clang/lib/libclang.dylib" />
+      <env name="PATH" value="$USER_HOME$/.nvm/versions/node/v16.14.0/bin:$USER_HOME$/go/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:$USER_HOME$/.cargo/bin:/usr/local/bin:/usr/local/gcc-arm/bin:$PROJECT_DIR$/../android-sdk/cmdline-tools/bin:$PROJECT_DIR$/../android-sdk/platform-tools" />
+    </envs>
+    <option name="isRedirectInput" value="false" />
+    <option name="redirectInputPath" value="" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Build" run_configuration_type="CargoCommandRunConfiguration" />
+    </method>
+  </configuration>
+</component>
